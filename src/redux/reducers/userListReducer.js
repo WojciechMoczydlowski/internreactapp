@@ -36,7 +36,7 @@ const userListReducer = (state = users, action) => {
       };
     case SORT_BY_NICKNAME:
       usersArr = state.usersArr;
-      sortedArr = usersArr.sort(function(a, b) {
+      sortedArr = usersArr.slice(0).sort(function(a, b) {
         return a.nickname < b.nickname ? -1 : a.nickname > b.nickname ? 1 : 0;
       });
       return {
@@ -45,7 +45,7 @@ const userListReducer = (state = users, action) => {
       };
     case SORT_BY_EMAIL:
       usersArr = state.usersArr;
-      sortedArr = usersArr.sort(function(a, b) {
+      sortedArr = usersArr.slice(0).sort(function(a, b) {
         return a.email < b.email ? -1 : a.email > b.email ? 1 : 0;
       });
       return {
@@ -54,7 +54,7 @@ const userListReducer = (state = users, action) => {
       };
     case SORT_BY_IPADRESS:
       usersArr = state.usersArr;
-      sortedArr = usersArr.sort(function(a, b) {
+      sortedArr = usersArr.slice(0).sort(function(a, b) {
         return a.ipadress < b.ipadress ? -1 : a.ipadress > b.ipadress ? 1 : 0;
       });
       return {

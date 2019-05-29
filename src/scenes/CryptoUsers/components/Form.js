@@ -34,9 +34,9 @@ class Form extends Component {
 
   handleAddUser = event => {
     event.preventDefault();
-    this.props.addUser({ nickname:'Wojtek', email:'wojtek@gmail.com', ipadress:'113.114.115.112' });
-    this.props.addUser({ nickname:'Kuba', email:'wojtek@gmail.com', ipadress:'115.114.214.114' });
-    this.props.addUser({ nickname:'Zdzich', email:'wojtek@gmail.com', ipadress:'112.141.114.122' });
+    this.props.addUser({ nickname:'Wojtek', email:'aajtek@gmail.com', ipadress:'113.114.115.112' });
+    this.props.addUser({ nickname:'Kuba', email:'aojtek@gmail.com', ipadress:'115.114.214.114' });
+    this.props.addUser({ nickname:'Zdzich', email:'bojtek@gmail.com', ipadress:'112.141.114.122' });
    let validationComplete = true;
 
     const nickname = this.props.nickname;

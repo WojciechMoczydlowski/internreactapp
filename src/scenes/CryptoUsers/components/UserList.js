@@ -23,12 +23,18 @@ class UserList  extends Component
       this.props.sortByIpadress();
     }
   }
+  randomId = () =>{
+    return '_' + Math.random().toString(36).substr(2, 9);
+  };
+
+  handleDeleteUser = (nickname) =>{
+    //this.props.deleteUser(nickname);
+    console.log('deleteUser');
+  }
 
   render(){
     const { classes } = this.props;
     const { users } = this.props;
-    
-    console.log('up');
     return (
       <div className={classes.root}>
         <ul className={classes.label}>
@@ -38,7 +44,7 @@ class UserList  extends Component
         </ul>
       <div>
       {users.map(user => (
-          <UserListItem key={user.nickname} {...user} />
+          <UserListItem key={this.randomId()} {...user} deleteUser = {this.handleDeleteUser}/>
         ))}
       </div>
       </div>
