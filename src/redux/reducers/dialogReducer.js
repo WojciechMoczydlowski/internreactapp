@@ -7,7 +7,6 @@ import {
    showDeleteUsersListDialog:false,
    showDeleteUserDialog:false,
   };
-  
   const dialogReducer = (state = dialog, action) => {
     switch (action.type) {
       case SET_DELETE_USERS_LIST_DIALOG:

@@ -121,7 +121,7 @@ class Form extends Component {
         <ConfirmDialogList
           display={showDialog}
           showConfirmDialog={this.props.setDeleteUsersListDialog}
-          message="Are you shure to delete users list?"
+          message="Are you sure to delete users list?"
           title="Delete users list"
           delete = {this.props.deleteUserList}
         />

@@ -23,6 +23,7 @@
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "surge": "^0.21.0",
     "typeface-roboto": "0.0.54",
     "uniqid": "^5.0.3"
   },

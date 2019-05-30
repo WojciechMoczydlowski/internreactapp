@@ -17,7 +17,7 @@ const UserListItem = props => {
     <React.Fragment>
         <ConfirmDialogUser
           display={props.showDialog}
-          message= {"Are you shure to delete user?"}
+          message= {"Are you sure to delete user?"}
           title="Delete users list"
           delete={props.deleteUser}
           showConfirmDialog={props.setDeleteUserDialog}
