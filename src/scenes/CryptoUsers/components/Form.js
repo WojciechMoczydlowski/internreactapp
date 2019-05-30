@@ -21,9 +21,7 @@ import {
   handleEmailError,
   handleIpadressError
 } from "../../../redux/actions/errorActions";
-import {
-  setDeleteUsersListDialog,
-} from "../../../redux/actions/dialogActions";
+import { setDeleteUsersListDialog } from "../../../redux/actions/dialogActions";
 class Form extends Component {
   handleNicknameChange = event => {
     this.props.changeNickname(event.target.value);
@@ -49,6 +47,12 @@ class Form extends Component {
       this.props.handleNicknameError({
         display: true,
         message: "This nickname is used"
+      });
+    } else if (!this.nicknameIsProvide(nickname)) {
+      validationComplete = false;
+      this.props.handleNicknameError({
+        display: true,
+        message: "Fill nickname field"
       });
     } else {
       this.props.handleNicknameError({ display: false, message: "" });
@@ -106,7 +110,11 @@ class Form extends Component {
     return result === undefined ? true : false;
   };
 
-    handleDeleteList =  event => {
+  nicknameIsProvide = nickname => {
+    return nickname === "" ? false: true;
+  };
+
+  handleDeleteList = event => {
     event.preventDefault();
     this.props.setDeleteUsersListDialog(true);
   };
@@ -123,7 +131,7 @@ class Form extends Component {
           showConfirmDialog={this.props.setDeleteUsersListDialog}
           message="Are you sure to delete users list?"
           title="Delete users list"
-          delete = {this.props.deleteUserList}
+          delete={this.props.deleteUserList}
         />
         <form className={classes.container} noValidate autoComplete="off">
           <div className={classes.flexWrapperRow}>
@@ -212,7 +220,7 @@ const mapStateToProps = state => ({
   nicknameError: state.errors.nicknameError,
   emailError: state.errors.emailError,
   ipadressError: state.errors.ipadressError,
-  showDialog: state.dialog.showDeleteUsersListDialog,
+  showDialog: state.dialog.showDeleteUsersListDialog
 });
 
 const mapDispatchToProps = dispatch => {
@@ -243,7 +251,7 @@ const mapDispatchToProps = dispatch => {
     },
     setDeleteUsersListDialog: payload => {
       dispatch(setDeleteUsersListDialog(payload));
-    },
+    }
   };
 };
 
