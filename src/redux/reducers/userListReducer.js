@@ -12,6 +12,7 @@ const users = {
 const userListReducer = (state = users, action) => {
   let usersArr;
   let sortedArr;
+  let newUsersArr;
   switch (action.type) {
     case ADD_USER:
       const user = {
@@ -19,14 +20,23 @@ const userListReducer = (state = users, action) => {
         email: action.payload.email,
         ipadress: action.payload.ipadress
       };
-      const newUsersArr = [...state.usersArr, user];
+      newUsersArr = [...state.usersArr, user];
       return {
         ...state,
         usersArr: newUsersArr
       };
     case DELETE_USER:
+      const nicknameToDelete = action.payload;
+      usersArr = state.usersArr;
+      const  filterUsers =(user)=> {
+          console.log(user.nickname, nicknameToDelete);
+          return nicknameToDelete !== user.nickname;
+        }
+      newUsersArr = usersArr.slice(0).filter(filterUsers);
+      console.log( newUsersArr );
       return {
-        ...state
+        ...state,
+        usersArr:newUsersArr
       };
     case DELETE_USER_LIST:
       const emptyArr = [];

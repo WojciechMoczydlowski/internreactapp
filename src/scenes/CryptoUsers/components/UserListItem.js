@@ -7,6 +7,7 @@ const UserListItem = props => {
   const { nickname = '', email = '', ipadress = ''} = props;
   const {handleDeleteUser} = props;
   const iconClasses = "fas fa-times " + classes.icon;
+  // onClick = {() =>handleDeleteUser(nickname)
   return (
     <ul className={classes.label}>
       <li className={classes.label_item}>{nickname}</li>
