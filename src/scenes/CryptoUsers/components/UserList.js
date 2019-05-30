@@ -1,56 +1,80 @@
-import React, { Component }  from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import UserListItem from "./UserListItem";
 import { deleteUser } from "../../../redux/actions/userListActions";
-import { sortByNickname , sortByEmail , sortByIpadress } from "../../../redux/actions/userListActions";
+import {
+  sortByNickname,
+  sortByEmail,
+  sortByIpadress
+} from "../../../redux/actions/userListActions";
+import {
+  setDeleteUserDialog
+} from "../../../redux/actions/dialogActions";
 
-
-class UserList  extends Component
- {
-
-  handleSorting = (sortBy) =>{
-    console.log(sortBy);
-    if(sortBy === 'nickname'){
+class UserList extends Component {
+  handleSorting = sortBy => {
+    if (sortBy === "nickname") {
       this.props.sortByNickname();
-    }
-    else if(sortBy === 'email'){
+    } else if (sortBy === "email") {
       this.props.sortByEmail();
-    }
-    else if(sortBy === 'ipadress'){
+    } else if (sortBy === "ipadress") {
       this.props.sortByIpadress();
     }
-
-  }
-  randomId = () =>{
-    return '_' + Math.random().toString(36).substr(2, 9);
+  };
+  randomId = () => {
+    return (
+      "_" +
+      Math.random()
+        .toString(36)
+        .substr(2, 9)
+    );
   };
 
-  handleDeleteUser = (nickname) =>{
-    this.props.deleteUser(nickname);
-  }
-
-  render(){
+  render() {
     const { classes } = this.props;
     const { users } = this.props;
     return (
-      <div className={classes.root}>
-        <ul className={classes.label}>
-          <li className={classes.label_item} onClick = {() => this.handleSorting('nickname')}>Nickname</li>
-          <li className={classes.label_item} onClick = {() =>this.handleSorting('email')}>Email</li>
-          <li className={classes.label_item} onClick = {() =>this.handleSorting('ipadress')}>IP adress</li>
-        </ul>
-      <div>
-      {users.map(user => (
-          <UserListItem key={this.randomId()} {...user} handleDeleteUser = {this.handleDeleteUser}/>
-        ))}
-      </div>
-      </div>
+      <React.Fragment>
+        <div className={classes.root}>
+          <ul className={classes.label}>
+            <li
+              className={classes.label_item}
+              onClick={() => this.handleSorting("nickname")}
+            >
+              Nickname
+            </li>
+            <li
+              className={classes.label_item}
+              onClick={() => this.handleSorting("email")}
+            >
+              Email
+            </li>
+            <li
+              className={classes.label_item}
+              onClick={() => this.handleSorting("ipadress")}
+            >
+              IP adress
+            </li>
+          </ul>
+          <div>
+            {users.map(user => (
+              <UserListItem
+                key={this.randomId()}
+                deleteUser={this.props.deleteUser}
+                showDialog = {this.props.showDialog}
+                setDeleteUserDialog = {this.props.setDeleteUserDialog}
+                {...user}
+              />
+            ))}
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
-};
+}
 const styles = theme => ({
   root: {
     width: "100%",
@@ -76,7 +100,7 @@ const styles = theme => ({
     padding: "5px 10px 5px 10px",
     color: "black",
     fontWeight: "bold",
-    cursor: 'pointer',
+    cursor: "pointer"
   }
 });
 
@@ -85,7 +109,8 @@ UserList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  users: state.userList.usersArr
+  users: state.userList.usersArr,
+  showDialog: state.dialog.showDeleteUserDialog,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -101,6 +126,9 @@ const mapDispatchToProps = dispatch => {
     },
     sortByIpadress: () => {
       dispatch(sortByIpadress());
+    },
+    setDeleteUserDialog: payload => {
+      dispatch(setDeleteUserDialog(payload));
     },
   };
 };

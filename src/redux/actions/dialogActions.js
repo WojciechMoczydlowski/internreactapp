@@ -1,15 +1,15 @@
 import {
-    SHOW_CONFIRM_DIALOG,
-    HANDLE_CONFIRMATION,
+    SET_DELETE_USERS_LIST_DIALOG,
+    SET_DELETE_USER_DIALOG,
   } from "./types";
   
-  export const showConfirmDialog = (payload) => ({
-    type: SHOW_CONFIRM_DIALOG,
+  export const setDeleteUsersListDialog = (payload) => ({
+    type: SET_DELETE_USERS_LIST_DIALOG,
     payload
   });
   
-  export const handleConfirmation = (payload) => ({
-    type:  HANDLE_CONFIRMATION,
+  export const setDeleteUserDialog = (payload) => ({
+    type:  SET_DELETE_USER_DIALOG,
     payload
   });
   

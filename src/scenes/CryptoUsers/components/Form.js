@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import ActionButton from "./ActionButton";
-import ConfirmDialog from "./ConfirmDialog";
+import ConfirmDialogList from "./ConfirmDialogList";
 import {
   changeNickname,
   changeEmail,
@@ -22,8 +22,7 @@ import {
   handleIpadressError
 } from "../../../redux/actions/errorActions";
 import {
-  showConfirmDialog,
-  handleConfirmation
+  setDeleteUsersListDialog,
 } from "../../../redux/actions/dialogActions";
 class Form extends Component {
   handleNicknameChange = event => {
@@ -38,21 +37,6 @@ class Form extends Component {
 
   handleAddUser = event => {
     event.preventDefault();
-    this.props.addUser({
-      nickname: "Wojtek",
-      email: "aajtek@gmail.com",
-      ipadress: "113.114.115.112"
-    });
-    this.props.addUser({
-      nickname: "Kuba",
-      email: "aojtek@gmail.com",
-      ipadress: "115.114.214.114"
-    });
-    this.props.addUser({
-      nickname: "Zdzich",
-      email: "bojtek@gmail.com",
-      ipadress: "112.141.114.122"
-    });
     let validationComplete = true;
 
     const nickname = this.props.nickname;
@@ -122,27 +106,24 @@ class Form extends Component {
     return result === undefined ? true : false;
   };
 
-  handleDeleteList = event => {
+    handleDeleteList =  event => {
     event.preventDefault();
-    this.props.deleteUserList();
-    //this.props.handleConfirmation(true);
-    this.props.showConfirmDialog(true);
+    this.props.setDeleteUsersListDialog(true);
   };
   render() {
-    console.log(this.props.users);
     const { classes } = this.props;
     const { nickname, email, ipadress, users } = this.props;
     const { nicknameError, emailError, ipadressError } = this.props;
-    const { showDialog, dialogConfirmation } = this.props;
+    const { showDialog } = this.props;
     const displayDeleteListButton = users.length > 0 ? true : false;
     return (
       <React.Fragment>
-        <ConfirmDialog
+        <ConfirmDialogList
           display={showDialog}
-          showConfirmDialog={this.props.showConfirmDialog}
-          handleConfirmation={this.props.handleConfirmation}
+          showConfirmDialog={this.props.setDeleteUsersListDialog}
           message="Are you shure to delete users list?"
-          title="Delete user list"
+          title="Delete users list"
+          delete = {this.props.deleteUserList}
         />
         <form className={classes.container} noValidate autoComplete="off">
           <div className={classes.flexWrapperRow}>
@@ -231,8 +212,7 @@ const mapStateToProps = state => ({
   nicknameError: state.errors.nicknameError,
   emailError: state.errors.emailError,
   ipadressError: state.errors.ipadressError,
-  showDialog: state.dialog.show,
-  dialogConfirmation: state.dialog.confirmation
+  showDialog: state.dialog.showDeleteUsersListDialog,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -261,12 +241,9 @@ const mapDispatchToProps = dispatch => {
     handleIpadressError: error => {
       dispatch(handleIpadressError(error));
     },
-    showConfirmDialog: payload => {
-      dispatch(showConfirmDialog(payload));
+    setDeleteUsersListDialog: payload => {
+      dispatch(setDeleteUsersListDialog(payload));
     },
-    handleConfirmation: payload => {
-      dispatch(handleConfirmation(payload));
-    }
   };
 };
 

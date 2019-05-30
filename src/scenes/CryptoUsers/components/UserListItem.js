@@ -1,20 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ConfirmDialogUser from "./ConfirmDialogUser";
 import { withStyles } from "@material-ui/core/styles";
 
 const UserListItem = props => {
+
+  const handleDeleteUser = (nickname) =>{
+    props.setDeleteUserDialog(true);
+  }
+
   const { classes } = props;
   const { nickname = '', email = '', ipadress = ''} = props;
-  const {handleDeleteUser} = props;
   const iconClasses = "fas fa-times " + classes.icon;
-  // onClick = {() =>handleDeleteUser(nickname)
+  
   return (
+    <React.Fragment>
+        <ConfirmDialogUser
+          display={props.showDialog}
+          message= {"Are you shure to delete user?"}
+          title="Delete users list"
+          delete={props.deleteUser}
+          showConfirmDialog={props.setDeleteUserDialog}
+          nickname ={nickname}
+        />
     <ul className={classes.label}>
       <li className={classes.label_item}>{nickname}</li>
       <li className={classes.label_item}>{email}</li>
       <li className={classes.label_item}>{ipadress}</li>
       <li className={classes.label_cross} onClick = {() =>handleDeleteUser(nickname)}> <i className={iconClasses}/></li>
     </ul>
+  </React.Fragment>
   );
 };
 const styles = theme => ({

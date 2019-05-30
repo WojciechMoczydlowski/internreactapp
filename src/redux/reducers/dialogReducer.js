@@ -1,27 +1,26 @@
 import {
-   SHOW_CONFIRM_DIALOG,
-   HANDLE_CONFIRMATION,
-  } from "../actions/types";
-  
+  SET_DELETE_USERS_LIST_DIALOG,
+  SET_DELETE_USER_DIALOG,
+} from "../actions/types";
+
   const dialog = {
-   show:false,
-   confirmation:false,
+   showDeleteUsersListDialog:false,
+   showDeleteUserDialog:false,
   };
   
   const dialogReducer = (state = dialog, action) => {
-    console.log(action.payload);
     switch (action.type) {
-      case SHOW_CONFIRM_DIALOG:
-        const show = action.payload;
+      case SET_DELETE_USERS_LIST_DIALOG:
+        const showDeleteUsersListDialog = action.payload;
         return {
           ...state,
-          show
+          showDeleteUsersListDialog
         };
-      case HANDLE_CONFIRMATION:
-        const confirmation = action.payload;
+      case SET_DELETE_USER_DIALOG:
+        const showDeleteUserDialog = action.payload;
         return {
           ...state,
-          confirmation
+          showDeleteUserDialog
         };
       default:
         return state;

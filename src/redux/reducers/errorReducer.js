@@ -21,7 +21,6 @@ const errors = {
 
 const errorReducer = (state = errors, action) => {
   let error;
-  console.log(action.type);
   switch (action.type) {
     case HANDLE_NICKAME_ERROR:
    error = {display:action.payload.display , message: action.payload.message}

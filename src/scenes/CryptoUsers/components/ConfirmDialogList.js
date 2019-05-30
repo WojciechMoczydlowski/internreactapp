@@ -16,20 +16,20 @@ function PaperComponent(props) {
   );
 }
 
-function ConfirmDialog(props) {
+function ConfirmDialogList(props) {
   
   const handleDialog = (confirmation) =>{ 
+    if(confirmation){
+      props.delete()
+    }
      props.showConfirmDialog(false);
-     props.handleConfirmation(confirmation);
   }
   
   const {display , message , title} = props;
-  console.log(props);
   return (
     <div>
       <Dialog
         open={display}
-        // onClose={handleClose}
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
       >
@@ -54,4 +54,4 @@ function ConfirmDialog(props) {
   );
 }
 
-export default ConfirmDialog;
+export default ConfirmDialogList;
